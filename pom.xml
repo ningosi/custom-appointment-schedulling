@@ -12,7 +12,7 @@
 	
 	<developers>
 		<developer>
-			<name>Tobin,Adam,Yonatan</name>
+			<name>Nicholas</name>
 		</developer>
 	</developers>
 	
@@ -22,9 +22,9 @@
 	</organization>
 
 	<scm>
-		<connection>scm:git:git@github.com:openmrs/openmrs-module-appointmentscheduling.git</connection>
-		<developerConnection>scm:git:git@github.com:openmrs/openmrs-module-appointmentscheduling.git</developerConnection>
-		<url>https://github.com/openmrs/openmrs-module-appointmentscheduling</url>
+		<connection>scm:git:https://github.com/ningosi/custom-appointment-schedulling.git</connection>
+		<developerConnection>scm:git:https://github.com/ningosi/custom-appointment-schedulling.git</developerConnection>
+		<url>https://github.com/ningosi/custom-appointment-schedulling</url>
  	    <tag>HEAD</tag>
   </scm>
 
