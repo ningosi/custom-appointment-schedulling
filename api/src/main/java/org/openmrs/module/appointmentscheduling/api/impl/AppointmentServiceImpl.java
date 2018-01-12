@@ -666,13 +666,13 @@ public class AppointmentServiceImpl extends BaseOpenmrsService implements Appoin
         Set<TimeSlot> timeSlotsToExclude = new HashSet<TimeSlot>();
 
         // generate the set of time slots to exclude that the specified patient already has an appointment for of the specified type
-        if (excludeTimeSlotsWithPatient != null) {
+        /*if (excludeTimeSlotsWithPatient != null) {
             for (Appointment appointment: getAppointmentsOfPatient(excludeTimeSlotsWithPatient)) {
                 if (appointment.getAppointmentType() == appointmentType && appointment.getStatus().getType() != Appointment.AppointmentStatusType.CANCELLED) {
                     timeSlotsToExclude.add(appointment.getTimeSlot());
                 }
             }
-        }
+        }*/
 
         // now do the actual filtering
         for (TimeSlot slot : suitableTimeSlots) {
@@ -784,13 +784,13 @@ public class AppointmentServiceImpl extends BaseOpenmrsService implements Appoin
 			boolean satisfyingConstraints = true;
 
 			// Filter by location
-			if (location != null) {
+			/*if (location != null) {
 				if (relevantLocations.contains(appointment.getTimeSlot()
 						.getAppointmentBlock().getLocation()))
 					appointmentsInLocation.add(appointment);
 			} else
 				appointmentsInLocation.add(appointment);
-
+*/
 		}
 
 		return appointmentsInLocation;
@@ -906,7 +906,7 @@ public class AppointmentServiceImpl extends BaseOpenmrsService implements Appoin
 		while (iter.hasNext()) {
 			Appointment appointment = iter.next();
 			// Check if past appointment
-			if (now.after(appointment.getTimeSlot().getEndDate())) {
+			/*if (now.after(appointment.getTimeSlot().getEndDate())) {
 				AppointmentStatus status = appointment.getStatus();
 				switch (status) {
 					case SCHEDULED :
@@ -927,7 +927,7 @@ public class AppointmentServiceImpl extends BaseOpenmrsService implements Appoin
 
 			} else {
 				appointmentsInStates.remove(appointment);
-			}
+			}*/
 		}
 
 		return appointmentsInStates;
@@ -1056,8 +1056,7 @@ public class AppointmentServiceImpl extends BaseOpenmrsService implements Appoin
 		// sum up the durations by type
 		for (Map.Entry<AppointmentStatusHistory, Double> entry : durations
 				.entrySet()) {
-			Provider provider = entry.getKey().getAppointment().getTimeSlot()
-					.getAppointmentBlock().getProvider();
+			Provider provider = entry.getKey().getAppointment().getProvider();
 			Double duration = entry.getValue();
 
 			// Added Math.sqrt in order to lower the mean and variance
@@ -1126,12 +1125,12 @@ public class AppointmentServiceImpl extends BaseOpenmrsService implements Appoin
 		// appointment type == null
 		ValidateUtil.validate(appointment);
 
-		if (!allowOverbook) {
+		/*if (!allowOverbook) {
 			if (getTimeLeftInTimeSlot(appointment.getTimeSlot()) < appointment
 					.getAppointmentType().getDuration()) {
 				throw new TimeSlotFullException();
 			}
-		}
+		}*/
 
 		appointment.setStatus(AppointmentStatus.SCHEDULED);
 		return Context.getService(AppointmentService.class).saveAppointment(

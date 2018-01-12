@@ -135,10 +135,10 @@ public class AppointmentFormController {
 			if (includeFull == null || !Context.hasPrivilege(AppointmentUtils.PRIV_SQUEEZE_APPOINTMENTS)) {
 				availableTimeSlots = Context.getService(AppointmentService.class).getTimeSlotsByConstraints(appointmentType,
 				    fromDate, toDate, provider, location);
-				TimeSlot currentSelectedSlot = appointment.getTimeSlot();
+				//TimeSlot currentSelectedSlot = appointment.getTimeSlot();
 				//The appointment time slot should be selected from the latest list
-				if (currentSelectedSlot != null && !availableTimeSlots.contains(currentSelectedSlot))
-					appointment.setTimeSlot(null);
+				//if (currentSelectedSlot != null && !availableTimeSlots.contains(currentSelectedSlot))
+					//appointment.setTimeSlot(null);
 			}
 			
 			//Include full and indicate which are full using the model attribute fullSlots
@@ -209,7 +209,7 @@ public class AppointmentFormController {
 						VisitType defaultVisitType = Context.getVisitService().getVisitType(visitTypeId);
 						
 						Visit visit = new Visit(appointment.getPatient(), defaultVisitType, new Date());
-						visit.setLocation(appointment.getTimeSlot().getAppointmentBlock().getLocation());
+						//visit.setLocation(appointment.getTimeSlot().getAppointmentBlock().getLocation());
 						visit = Context.getVisitService().saveVisit(visit);
 						appointment.setVisit(visit);
 					} else

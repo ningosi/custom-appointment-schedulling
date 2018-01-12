@@ -272,7 +272,7 @@ public class AppointmentListController {
 				
 				//Start a new visit
 				Visit visit = new Visit(selectedAppointment.getPatient(), defaultVisitType, new Date());
-				visit.setLocation(selectedAppointment.getTimeSlot().getAppointmentBlock().getLocation());
+				//visit.setLocation(selectedAppointment.getTimeSlot().getAppointmentBlock().getLocation());
 				visit = Context.getVisitService().saveVisit(visit);
 				selectedAppointment.setVisit(visit);
 				Context.getService(AppointmentService.class).saveAppointment(selectedAppointment);

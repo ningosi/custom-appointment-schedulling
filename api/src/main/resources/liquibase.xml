@@ -412,4 +412,42 @@
         </addColumn>
     </changeSet>
 
+	<changeSet id="appointment-001-001" author="ningosi">
+		<preConditions onFail="MARK_RAN">
+			<dbms type="mysql"/>
+		</preConditions>
+		<comment>Adding relevant columns to the appointment table</comment>
+		<addColumn tableName="appointmentscheduling_appointment">
+			<column name="provider_id" type="int"/>
+		</addColumn>
+		<addColumn tableName="appointmentscheduling_appointment">
+			<column name="location_id" type="int"/>
+		</addColumn>
+		<addColumn tableName="appointmentscheduling_appointment">
+			<column name="start_date_time" type="datetime"/>
+		</addColumn>
+		<addColumn tableName="appointmentscheduling_appointment">
+			<column name="end_date_time" type="datetime"/>
+		</addColumn>
+	</changeSet>
+	<changeSet id="appointment-001-002" author="ningosi">
+		<preConditions onFail="MARK_RAN">
+			<dbms type="mysql"/>
+			<foreignKeyConstraintExists foreignKeyName="appointment_time_slot_id" />
+		</preConditions>
+		<comment>Removing the constraint on the appointment table from the slots</comment>
+		<dropForeignKeyConstraint baseTableName="appointmentscheduling_appointment" constraintName="appointment_time_slot_id" />
+	</changeSet>
+
+	<changeSet id="appointment-001-003" author="ningosi">
+		<preConditions onFail="MARK_RAN">
+			<dbms type="mysql"/>
+		</preConditions>
+		<comment>Deleting a column and its associated key</comment>
+		<sql>
+			ALTER TABLE appointmentscheduling_appointment DROP COLUMN time_slot_id;
+		</sql>
+	</changeSet>
+
+
 </databaseChangeLog>

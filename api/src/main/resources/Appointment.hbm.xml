@@ -11,9 +11,9 @@
 		</id>
 		
 		<discriminator column="appointment_id" insert="false" />
-		<many-to-one name="timeSlot" column="time_slot_id" class="TimeSlot" not-null="true" />
 		<many-to-one name="visit" column="visit_id" class="org.openmrs.Visit" not-null="false" />
 		<many-to-one name="patient" column="patient_id" class="org.openmrs.Patient" not-null="true" />
+
 		
 		<property name="status" column="status" length="255" not-null="true">
 			<type name="org.hibernate.type.EnumType">
@@ -37,6 +37,11 @@
 		<many-to-one name="creator" class="org.openmrs.User" not-null="true" />	
 		<many-to-one name="changedBy" class="org.openmrs.User" column="changed_by"/>
 		<many-to-one name="voidedBy" class="org.openmrs.User" column="voided_by" />
+
+		<many-to-one name="provider" class="org.openmrs.Provider" column="provider_id"/>
+		<many-to-one name="location" class="org.openmrs.Location" column="location_id"/>
+		<property name="startDateTime" type="java.util.Date" column="start_date_time"/>
+		<property name="endDateTime" type="java.util.Date" column="end_date_time"/>
 	</class>
 
 </hibernate-mapping>

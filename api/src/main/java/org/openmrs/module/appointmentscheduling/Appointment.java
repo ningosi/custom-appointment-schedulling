@@ -14,18 +14,11 @@
 package org.openmrs.module.appointmentscheduling;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.openmrs.BaseOpenmrsData;
-import org.openmrs.BaseOpenmrsMetadata;
-import org.openmrs.BaseOpenmrsObject;
-import org.openmrs.Patient;
-import org.openmrs.Visit;
+import org.openmrs.*;
 import org.openmrs.module.appointmentscheduling.serialize.AppointmentStatusSerializer;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * It is a model class. It should extend either {@link BaseOpenmrsObject} or
@@ -110,8 +103,6 @@ public class Appointment extends BaseOpenmrsData implements Serializable {
 
 	private Integer appointmentId;
 
-	private TimeSlot timeSlot;
-
 	private Visit visit;
 
 	private Patient patient;
@@ -124,6 +115,43 @@ public class Appointment extends BaseOpenmrsData implements Serializable {
 
 	private AppointmentType appointmentType;
 
+	private Provider provider;
+	private Location location;
+	private Date startDateTime;
+	private Date endDateTime;
+
+	public Provider getProvider() {
+		return provider;
+	}
+
+	public void setProvider(Provider provider) {
+		this.provider = provider;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public Date getStartDateTime() {
+		return startDateTime;
+	}
+
+	public void setStartDateTime(Date startDateTime) {
+		this.startDateTime = startDateTime;
+	}
+
+	public Date getEndDateTime() {
+		return endDateTime;
+	}
+
+	public void setEndDateTime(Date endDateTime) {
+		this.endDateTime = endDateTime;
+	}
+
 	public Appointment() {
 
 	}
@@ -132,9 +160,8 @@ public class Appointment extends BaseOpenmrsData implements Serializable {
 		setId(appointmentId);
 	}
 
-	public Appointment(TimeSlot timeSlot, Visit visit, Patient patient,
+	public Appointment(Visit visit, Patient patient,
 			AppointmentType appointmentType, AppointmentStatus status) {
-		setTimeSlot(timeSlot);
 		setVisit(visit);
 		setPatient(patient);
 		setStatus(status);
@@ -163,14 +190,6 @@ public class Appointment extends BaseOpenmrsData implements Serializable {
 	@Override
 	public void setId(Integer id) {
 		setAppointmentId(id);
-	}
-
-	public TimeSlot getTimeSlot() {
-		return timeSlot;
-	}
-
-	public void setTimeSlot(TimeSlot timeSlot) {
-		this.timeSlot = timeSlot;
 	}
 
 	public Visit getVisit() {

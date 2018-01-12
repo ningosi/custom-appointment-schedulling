@@ -53,7 +53,7 @@ public class DWRAppointmentService {
 		Appointment lastAppointment = Context.getService(AppointmentService.class).getLastAppointment(patient);
 		if (lastAppointment != null && lastAppointment.getStatus() == AppointmentStatus.MISSED)
 			patientData.setDateMissedLastAppointment(Context.getDateFormat().format(
-			    lastAppointment.getTimeSlot().getStartDate()));
+			    lastAppointment.getStartDateTime()));
 		//Get Patient's full name
 		patientData.setFullName(patient.getPersonName().getFullName());
 		
@@ -151,10 +151,10 @@ public class DWRAppointmentService {
 					for (Appointment appointment : appointmentsInTimeSlot) {
 						//Create an AppointmentData object
 						PatientData patientDescription = this.getPatientDescription(appointment.getPatient().getPatientId());
-						TimeSlot appointmentTimeSlot = appointment.getTimeSlot();
-						String dateOnly = Context.getDateFormat().format(appointment.getTimeSlot().getStartDate());
-						String startTimeOnly = Context.getTimeFormat().format(appointment.getTimeSlot().getStartDate());
-						String endTimeOnly = Context.getTimeFormat().format(appointment.getTimeSlot().getEndDate());
+						//TimeSlot appointmentTimeSlot = appointment.getTimeSlot();
+						String dateOnly = Context.getDateFormat().format(appointment.getStartDateTime());
+						String startTimeOnly = Context.getTimeFormat().format(appointment.getStartDateTime());
+						String endTimeOnly = Context.getTimeFormat().format(appointment.getEndDateTime());
 						AppointmentData appointmentdata = new AppointmentData(patientDescription, appointment
 						        .getAppointmentType().getName(), dateOnly, startTimeOnly, endTimeOnly,
 						        appointment.getReason());
@@ -228,7 +228,7 @@ public class DWRAppointmentService {
 			return false;
 		else {
 			Appointment appointment = Context.getService(AppointmentService.class).getAppointment(appointmentId);
-			Provider provider = appointment.getTimeSlot().getAppointmentBlock().getProvider();
+			Provider provider = appointment.getProvider();
 			
 			List<Appointment> inconsultationAppointments = Context.getService(AppointmentService.class)
 			        .getAppointmentsByConstraints(null, null, null, provider, null, AppointmentStatus.INCONSULTATION);
@@ -250,7 +250,7 @@ public class DWRAppointmentService {
 		else {
 			Appointment appointment = Context.getService(AppointmentService.class).getLastAppointment(
 			    Context.getPatientService().getPatient(patientId));
-			Provider provider = appointment.getTimeSlot().getAppointmentBlock().getProvider();
+			Provider provider = appointment.getProvider();
 			
 			List<Appointment> inconsultationAppointments = Context.getService(AppointmentService.class)
 			        .getAppointmentsByConstraints(null, null, null, provider, null, AppointmentStatus.INCONSULTATION);
